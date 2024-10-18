@@ -16,5 +16,5 @@
   
   // Example usage
   const pnrNumber = generatePNR();
-  console.log("Generated PNR Number:", pnrNumber);
+
   
