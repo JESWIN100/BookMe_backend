@@ -25,7 +25,8 @@ export const userCreate = asyncHandler(async (req, res, next) => {
 
     // Hash the password
     const salt = 10;
-    const hashedPassword = bcrypt.hashSync(password, salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
 
 
 
