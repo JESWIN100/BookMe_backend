@@ -18,7 +18,7 @@ console.log(req.body);
         name:name,
         amount:amount * 100,
         redirectUrl:`${process.env.CLIENT_DOMAIN}/api/v1/payment/status?id=${transactionId}`,
-        redirectMode:"POST",
+        redirectMode:"GET",
         mobileNumber:mobile,
         paymentInstrument:{
             type:"PAY_PAGE"
