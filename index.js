@@ -12,7 +12,7 @@ connectDB();
 
 
 app.use(cors({
-    origin: "http://localhost:5173", 
+    origin: "https://bookme-ecru.vercel.app", 
     credentials: true, 
    
   }));
