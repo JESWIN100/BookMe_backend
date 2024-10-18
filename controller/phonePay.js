@@ -17,7 +17,7 @@ console.log(req.body);
         merchantTransactionId:transactionId,
         name:name,
         amount:amount * 100,
-        redirectUrl:`http://localhost:3690/api/v1/payment/status?id=${transactionId}`,
+        redirectUrl:`${process.env.CLIENT_DOMAIN}/api/v1/payment/status?id=${transactionId}`,
         redirectMode:"POST",
         mobileNumber:mobile,
         paymentInstrument:{
