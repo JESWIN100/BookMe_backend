@@ -1,5 +1,4 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
-import { generatePNR } from "./pnrController.js";
 
 
 const generateOTP = () => {

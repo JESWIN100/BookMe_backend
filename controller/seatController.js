@@ -1,6 +1,5 @@
-import { Bus } from "../model/busModel.js";
+
 import { Seat } from "../model/seatModel.js";
-import { User } from "../model/userMode;.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 
