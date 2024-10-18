@@ -25,6 +25,8 @@ app.get('/', (req, res) => {
 });
 
 
+
+
 app.use('/api', apiRouter);
 // 404 handler for undefined routes
 app.all('*', (req, res) => {

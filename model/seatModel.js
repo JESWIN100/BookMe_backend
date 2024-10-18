@@ -6,7 +6,7 @@ const seatSchema = new mongoose.Schema({
     enum: ['available', 'booked', 'pending','confirmed','canceled'], 
     default: 'available', 
   },
-  seatNumbers: { // Change seatNumber to seatNumbers to hold multiple seats
+  seatNumbers: { 
     type: [Number],
     required: true
   },

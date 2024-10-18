@@ -5,12 +5,13 @@ import { generatePNR } from "./pnrController.js";
 import { Seat } from "../model/seatModel.js";
 // Create passenger details
 export const passsengerDetails = asyncHandler(async (req, res, next) => {
-    // Validate request body
+    
     const { error } = passengerDetailsSchema.validate(req.body);
     if (error) return res.status(400).json({ success: false, message: error.details[0].message });
 
     const pnrNumber = generatePNR();
-    const { name, gender, age, residency,bus,user,email, phone,totalPrice,seats,} = req.body;
+    const { name, gender, age, residency,bus,email, phone,totalPrice,seats,} = req.body;
+    const user=req.user.userId; 
 
   //  const seatCheck=Passenger.findOne({})
 
@@ -81,9 +82,9 @@ if (!seat) {
 
 
 export const getPassengerDetailsByUserId = asyncHandler(async (req, res, next) => {
-  // const userId = req.params.userId; 
-  const {userId} = req.params; 
-  // Validate userId (you can add more validation if necessary)
+
+  // const {userId} = req.params; 
+  const userId=req.user.userId; 
   if (!userId) {
       return res.status(400).json({ success: false, message: "User ID is required" });
   }

@@ -70,6 +70,14 @@ const busSchema = new mongoose.Schema({
     unique: true,
     required: true
   },
+  pickupStages:{
+    type:[String],
+    required:true
+      },
+  dropoffStages:{
+type:[String],
+required:true
+  },
   bookings: [
     {
       type: mongoose.Schema.Types.ObjectId,

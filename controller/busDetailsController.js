@@ -4,12 +4,16 @@ import { generatePNR } from "./pnrController.js";
 
 export const bookCreate = asyncHandler(async (req, res, next) => {
     // Extract bus details from request body
-    const { busNumber, busName,duration, seatsAvailable, departureTime, arrivalTime,bus,day, StartsPrice,dropoffDate, typeofBus, route,date,dropoffLocation,pickupLocation,isAvailable } = req.body;
+    const { busNumber, busName,duration, seatsAvailable, departureTime,pickupStages,dropoffStages, arrivalTime,bus,day, StartsPrice,dropoffDate, typeofBus, route,date,dropoffLocation,pickupLocation,isAvailable } = req.body;
 
 
     const pnrNumber = generatePNR();
-    const formattedDate = new Date(date).toISOString().split('T')[0];
-    // Create new bus entry
+    const pickupdate = new Date(date).toISOString().split('T')[0];
+    console.log(pickupdate);
+    
+    const dropoffdate = new Date(dropoffDate).toISOString().split('T')[0];
+    console.log(dropoffdate);
+
     const newBus = new Bus({
         busNumber,
         busName,
@@ -21,11 +25,13 @@ export const bookCreate = asyncHandler(async (req, res, next) => {
         day,
         route,
         bus,
-        dropoffDate:formattedDate,
-        date:formattedDate,
+        dropoffDate:dropoffdate,
+        date:pickupdate,
         dropoffLocation,
         pickupLocation,
         duration,
+        pickupStages: pickupStages ,
+        dropoffStages: dropoffStages ,
         isAvailable,
         pnr: pnrNumber 
     });

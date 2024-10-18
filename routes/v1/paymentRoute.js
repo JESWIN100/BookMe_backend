@@ -1,12 +1,16 @@
 import express from 'express';
 import {  getAllPayments, getPaymentsByCarId, MakePayment } from '../../controller/PaymentController.js';
 import { authUser } from '../../middleware/userAuth.js';
+import { CheckStatus, MakeAmount } from '../../controller/phonePay.js';
 
 const router = express.Router();
-
+                          
  router.post("/create-checkout-session",authUser, MakePayment); // Added authUser middleware
-//  router.put('/Adminbooking/:bookingId/confirm',authUser, confirmPayment);
- router.get('/payments',authUser, getAllPayments); 
+ router.post("/create", MakeAmount);
+ router.post('/status', CheckStatus);
+
+
+//  router.get('/payments',authUser, getAllPayments); 
  router.get('/payments/car/:carId',authUser, getPaymentsByCarId);
 //  router.get('/getPayment/:paymentId', getPaymentDetails);
 // Uncomment or remove these routes based on your use case

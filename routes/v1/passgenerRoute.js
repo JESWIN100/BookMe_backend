@@ -12,5 +12,5 @@ router.post('/add',authUser ,passsengerDetails);
 router.get('/getById/:id',authUser ,getPassengerByID);
 router.get('/passengers/:pnr',authUser, getPassengerByPNR);
 router.delete('/delete/:id',authUser, getPassengerDelete);
-router.get('/pass/:userId', getPassengerDetailsByUserId);
+router.get('/pass', authUser,getPassengerDetailsByUserId);
 export default router;

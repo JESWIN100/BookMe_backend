@@ -4,7 +4,7 @@ import { Payment } from '../model/paymentSChema.js';
 
 
 const stripe = new Stripe(process.env.Stripe_private_Api_Key);
-
+      
 export const MakePayment = asyncHandler(async (req, res, next) => {
     const { busName,total,seats,from, to, typeofBus } = req.body;
 
@@ -27,30 +27,7 @@ export const MakePayment = asyncHandler(async (req, res, next) => {
             },
             quantity: 1,
         },
-        // {
-        //     price_data: {
-        //         currency: 'inr',
-        //         product_data: {
-        //             name: 'Service Fee',
-                    
-        //         },
-        //         unit_amount: 5000, 
-               
-        //     },
-        //     quantity: 1,
-        // },
-        // {
-        //     price_data: {
-        //         currency: 'inr',
-        //         product_data: {
-        //             name: 'Discount',
-                    
-        //         },
-        //         unit_amount: Math.round(discount * 100), 
-               
-        //     },
-        //     quantity: 1,
-        // }
+        
     ];
     
         
@@ -94,10 +71,6 @@ export const MakePayment = asyncHandler(async (req, res, next) => {
 
 
 
-
-
-
-
 export const getAllPayments = asyncHandler(async (req, res, next) => {
     try {
         // Retrieve all payment documents from MongoDB
@@ -115,39 +88,6 @@ export const getAllPayments = asyncHandler(async (req, res, next) => {
         next(error);
     }
 });
-
-
-
-
-
-
-
-// export const confirmPayment = asyncHandler(async (req, res, next) => {
-//     const { paymentId } = req.params;
-
-//     try {
-//         // Find the payment document by ID
-//         const payment = await Payment.findById(paymentId);
-
-//         // Check if payment is found
-//         // if (!payment) {
-//         //     return res.status(404).json({ success: false, message: "Payment not found" });
-//         // }
-
-//         // Update payment status and confirmation date
-//         payment.paymentStatus = 'paid'; // Correct field name
-//         payment.confirmedAt = new Date();
-
-//         // Save updated payment document
-//         await payment.save();
-
-//         // Respond with success
-//         res.status(200).json({ success: true, message: "Payment confirmed", data: payment });
-//     } catch (error) {
-//         // Pass any unexpected errors to error-handling middleware
-//         next(error);
-//     }
-// });
 
 
 export const getPaymentsByCarId = asyncHandler(async (req, res, next) => {
@@ -170,18 +110,3 @@ export const getPaymentsByCarId = asyncHandler(async (req, res, next) => {
 });
 
 
-// export const confirmPayment = asyncHandler(async (req, res, next) => {
-//     const { bookingId } = req.params;
-  
-//     const booking = await Booking.findById(bookingId);
-//     if (!booking) {
-//       return res.status(404).json({ success: false, message: "Booking not found" });
-//     }
-  
-//     booking.paymentStatus = 'Paid';
-//     booking.confirmedAt = new Date();
-  
-//     await booking.save();
-  
-//     res.status(200).json({ success: true, message: "Payment confirmed", data: booking });
-//   });

@@ -54,46 +54,53 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 ///////////////////////////////
 
 export const userseatSelect = asyncHandler(async (req, res, next) => {
-  const { userId, busId, seatNumbers } = req.body;
+  try {
+    const { busId, seatNumbers } = req.body;
+    const userId = req.user.userId; 
+// console.log("gggggggggggggggggg",userId);
 
-  // Validate inputs
-  if (!userId) {
-    return res.status(400).json({ message: 'User ID is required.' });
-  }
-  if (!busId) {
-    return res.status(400).json({ message: 'Bus ID is required.' });
-  }
-  if (!seatNumbers || !Array.isArray(seatNumbers) || seatNumbers.length === 0) {
-    return res.status(400).json({ message: 'Seat numbers must be an array and contain at least one seat number.' });
-  }
-  
+    // Validate inputs
+    if (!userId) {
+      return res.status(400).json({ message: 'User ID is required.' });
+    }
+    if (!busId) {
+      return res.status(400).json({ message: 'Bus ID is required.' });
+    }
+    if (!seatNumbers || !Array.isArray(seatNumbers) || seatNumbers.length === 0) {
+      return res.status(400).json({ message: 'Seat numbers must be an array and contain at least one seat number.' });
+    }
 
-  // Check if any of the seats are already booked
-  const bookedSeats = await Seat.find({
-    bus: busId,
-    seatNumbers: { $in: seatNumbers },
-    status: 'pending',
-  });
+    
+    const bookedSeats = await Seat.find({
+      bus: busId,
+      seatNumbers: { $in: seatNumbers },
+      status: 'pending', 
+    }).populate("user").populate("bus");
 
-  if (bookedSeats.length > 0) {
-    return res.status(409).json({
-      message: `Some seats are already booked: ${bookedSeats.map(seat => seat.seatNumbers).join(', ')}`,
+    if (bookedSeats.length > 0) {
+      return res.status(409).json({
+        message: `Some seats are already booked: ${bookedSeats.map(seat => seat.seatNumbers).join(', ')}`,
+      });
+    }
+
+    // Create a new booking entry for the user with the seat numbers
+    const booking = new Seat({
+      user: userId,  // Use userId from the authenticated request
+      bus: busId,
+      seatNumbers, // Directly save the seatNumbers array
+      status: 'pending', 
     });
+
+    // Save the booking
+    await booking.save();
+
+    return res.status(200).json({ message: 'Seats booked successfully!', booking });
+  } catch (error) {
+    console.error("Error booking seats:", error);
+    return res.status(500).json({ message: 'An error occurred while booking seats.' });
   }
-
-  // Create a new booking entry for the user with the seat numbers
-  const booking = new Seat({
-    user: userId,
-    bus: busId,
-    seatNumbers: seatNumbers, // Save all seat numbers in an array
-    status: 'pending', 
-  });
-
-  // Save the booking
-  await booking.save();
-
-  return res.status(200).json({ message: 'Seats booked successfully!', booking });
 });
+
 
 
 
@@ -239,16 +246,14 @@ export const cancelBookingStatus = asyncHandler(async (req, res) => {
 
 
 export const getUserSeatSelection = asyncHandler(async (req, res, next) => {
-  const { userId } = req.params; 
-
+  const userId = req.user.userId 
+// console.log("ggggggggggggggggggggggg",userId);
 
   if (!userId) {
     return res.status(400).json({ message: 'User ID is required.' });
   }
 
-
-  const userBookings = await Seat.find({ user: userId }).populate('user') 
-  .populate('bus'); 
+  const userBookings = await Seat.find({ user: userId }).populate('user').populate('bus')
 
   if (!userBookings || userBookings.length === 0) {
     return res.status(404).json({ message: 'No bookings found!!' });
