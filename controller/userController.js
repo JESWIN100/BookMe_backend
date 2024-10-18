@@ -1,4 +1,4 @@
-import bcrypt  from 'bcrypt'
+import bcrypt  from 'bcryptjs'
 import { generateUserToken } from "../utils/generateToken.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { validateUserLogin, validateUserRegistration } from "../validation/userJoiValidation.js";
