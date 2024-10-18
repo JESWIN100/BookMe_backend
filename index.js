@@ -12,7 +12,7 @@ connectDB();
 
 
 app.use(cors({
-    origin: "https://bookme-git-main-jeswins-projects-f40474fd.vercel.app", 
+    origin: "http://localhost:5173", 
     credentials: true, 
    
   }));

@@ -1,4 +1,4 @@
-import bcrypt  from 'bcrypt'
+import bcrypt  from 'bcryptjs'
 import { Admin } from "../model/adminModel.js";
 import { Bus } from "../model/busModel.js";
 import { Passenger } from "../model/passengerModel.js";
