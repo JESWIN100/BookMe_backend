@@ -85,10 +85,10 @@ export const CheckStatus =asyncHandler(async(req,res)=>{
       await axios(options).then(response=>{
         console.log("uyuyuy",response.data);
         if(response.data.success===true){
-            const url ="http://localhost:5173/payment/scuess"
+            const url =`${process.env.CLIENT_DOMAIN}/payment/scuess`
             return res.redirect(url)
         }else{
-            const url ="http://localhost:5173/payment/failure"
+            const url =`${process.env.CLIENT_DOMAIN}/payment/failure`
             return res.redirect(url)
         }
       })
