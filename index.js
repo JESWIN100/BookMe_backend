@@ -12,7 +12,7 @@ connectDB();
 
 
 app.use(cors({
-    origin: "http://localhost:5173", 
+    origin: "https://bookme-sigma.vercel.app", 
     credentials: true, 
    
   }));
