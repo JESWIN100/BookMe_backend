@@ -17,13 +17,14 @@ console.log(req.body);
         merchantTransactionId:transactionId,
         name:name,
         amount:amount * 100,
-        redirectUrl:`${process.env.CLIENT_DOMAIN}/api/v1/payment/status?id=${transactionId}`,
-        redirectMode:"GET",
+        redirectUrl:`https://bookme-dkx5.onrender.com/api/v1/payment/status?id=${transactionId}`,
+        redirectMode:"POST",
         mobileNumber:mobile,
         paymentInstrument:{
             type:"PAY_PAGE"
         }
-    }
+     }       // redirectUrl:`http://localhost:3690/api/v1/payment/status?id=${transactionId}`,
+
    
     const payload=JSON.stringify(data);
     const payloadMain=Buffer.from(payload).toString('base64')

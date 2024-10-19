@@ -5,7 +5,7 @@ const router = express.Router();
                           
 
  router.post("/create", MakeAmount);
- router.get('/status', CheckStatus);
+ router.post("/status", CheckStatus);
 
 
 export default router;
