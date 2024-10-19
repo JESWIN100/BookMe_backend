@@ -203,11 +203,7 @@ export const verifyOTP = asyncHandler(async (req, res) => {
 
         export const userLogout=asyncHandler(async(req,res,next)=>{
 
-            res.clearCookie("token", {
-                httpOnly: true,
-                sameSite: "None",
-                path: "/"
-            });
+            res.clearCookie("token");
              res.json({success:true,message:'user logged out successfully'})
              
         
