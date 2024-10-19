@@ -203,12 +203,7 @@ export const verifyOTP = asyncHandler(async (req, res) => {
 
         export const userLogout=asyncHandler(async(req,res,next)=>{
 
-            res.cookie('token', {
-                httpOnly: true,    // Keeps the cookie inaccessible to JavaScript
-                secure: true,      // True if using HTTPS (which you should be)
-                sameSite: 'None',  // Required for cross-site cookies (Vercel -> Render)
-                path: '/'          
-              });
+            res.cookie("token");
               
              res.json({success:true,message:'user logged out successfully'})
              
