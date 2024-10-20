@@ -13,6 +13,6 @@ router.post('/login',userLogin);
 router.post('/verify-otp', verifyOTP);
 router.get('/profile', asyncHandler(authUser), userProfile);
 router.put('/updateUser/:id',upload.single('image'),authUser, asyncHandler(updateUser));
-router.post("/logout",authUser,asyncHandler,(userLogout))
+router.post("/logout",authUser,(userLogout))
 
 export default router;
