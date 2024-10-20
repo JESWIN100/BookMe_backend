@@ -178,7 +178,7 @@ export const verifyOTP = asyncHandler(async (req, res) => {
     await user.save();
 
     // Set token in cookies and return success response
-    res.cookie('token', token, { sameSite: 'None', secure: true, httpOnly: true });
+    res.cookie('token', token, { sameSite: 'None', secure: true});
     res.json({ success: true, message: 'User logged in successfully', token });
 });
 
