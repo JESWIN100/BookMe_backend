@@ -12,7 +12,7 @@ connectDB();
 
 
 app.use(cors({
-    origin: "https://bus-booking-frontent.onrender.com",  
+    origin: "https://bookme-git-main-jeswins-projects-f40474fd.vercel.app",  
     credentials: true, 
    
   }));
