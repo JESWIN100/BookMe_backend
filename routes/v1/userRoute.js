@@ -1,6 +1,6 @@
 import express from 'express';
 import { asyncHandler } from '../../utils/asyncHandler.js';
-import { updateUser, userCreate, userLogin, userLogout, userProfile, verifyOTP } from '../../controller/userController.js';
+import { checkUser, updateUser, userCreate, userLogin, userLogout, userProfile, verifyOTP } from '../../controller/userController.js';
 import { authUser } from '../../middleware/userAuth.js';
 import { upload } from '../../middleware/uploadMiddleWare.js';
 
@@ -15,4 +15,5 @@ router.get('/profile', asyncHandler(authUser), userProfile);
 router.put('/updateUser/:id',upload.single('image'),authUser, asyncHandler(updateUser));
 router.post("/logout",authUser,(userLogout))
 
+router.get("/check-user",authUser,(checkUser))
 export default router;

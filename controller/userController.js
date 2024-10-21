@@ -234,3 +234,17 @@ export const verifyOTP = asyncHandler(async (req, res) => {
             
                 res.json({ success: true, message: 'User updated successfully!', data: updatedUser });
             });
+
+
+            export const checkUser=asyncHandler(async(req,res,next)=>{
+  
+
+                const user=req.user;
+                if(!user){
+                    return res.status(401).json({success:false,message:'user not authenticated'})
+                    }
+                
+              res.json({success:true,message:'user is authenticated'})
+            
+            
+                } )
